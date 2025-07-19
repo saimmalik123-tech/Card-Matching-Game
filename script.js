@@ -12,7 +12,7 @@ button.innerText = 'Restart';
 
 let emojis = ['⚖️', '🔋', '🔫', '🧲', '💎', '📷', '💴', '🎁'];
 
-function shuffleEmojis() {
+function dublicateEmojis() {
     const doubleEmojis = [...emojis, ...emojis];
     doubleEmojis.sort(() => Math.random() - 0.5);
     return doubleEmojis;
@@ -20,16 +20,15 @@ function shuffleEmojis() {
 
 let lockBox = false;
 let flipped = [];
-let doubleEmojis = shuffleEmojis();
 
-mainBox.innerHTML = '';
-doubleEmojis.forEach((emoji) => {
-    const box = document.createElement('div');
-    mainBox.appendChild(box);
-    box.classList.add('box');
-    box.innerText = '';
-    box.dataset.emoji = emoji;
-});
+const doubleEmojis = dublicateEmojis();
+    doubleEmojis.forEach((emoji) => {
+        const box = document.createElement('div');
+        mainBox.appendChild(box);
+        box.classList.add('box');
+        box.innerText = '';
+        box.dataset.emoji = emoji;
+    });
 
 mainBox.addEventListener('click', (e) => {
     const clicked = e.target;
@@ -73,7 +72,7 @@ mainBox.addEventListener('click', (e) => {
 button.addEventListener('click', () => {
     const allBoxes = document.querySelectorAll('.box');
     allBoxes.forEach((box) => {
-        box.classList.remove('flipped', 'matched');
         box.innerText = '';
+        box.classList.remove('matched', 'flipped');
     });
 });
